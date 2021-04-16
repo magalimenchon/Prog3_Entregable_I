@@ -9,8 +9,8 @@ public class MyIterator implements Iterator<Integer>{
 	
 	//CONSTRUCTORS
 	
-	public MyIterator(Node first){
-		this.cursor = first;
+	public MyIterator(Node first){	//O(1)
+		this.cursor = first;	//O(1)
 	}
 	
 	
@@ -20,25 +20,24 @@ public class MyIterator implements Iterator<Integer>{
 	
 	@Override
 	public boolean hasNext() {	//O(1)
-		return this.cursor != null;
+		return this.cursor != null;	//O(1)
 	}
 
 	@Override
 	public Integer next() {	//O(1)
-		
-		Integer info = this.cursor.getInfo();
-		this.cursor = this.cursor.getNext();
-		
+		Integer info = this.cursor.getInfo();	//O(1)
+		this.cursor = this.cursor.getNext();	//O(1)
 		return info;
 	}
+	
 	
 	//EXTRAS
 	
 	public Integer get(){	//O(1)
-		return this.cursor.getInfo();
+		return this.cursor.getInfo();	//O(1)
 	}
-	//----No se utiliza en la entrega
-	public void goToNext(){	//O(1)	//Avanzar
-		this.cursor = this.cursor.getNext();
+	
+	public void move(){	//O(1)
+		this.cursor = this.cursor.getNext();	//O(1)
 	}
 }

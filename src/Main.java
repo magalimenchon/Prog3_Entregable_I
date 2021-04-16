@@ -90,46 +90,46 @@ public class Main {
 		getSubsequence(umbralExtraValor4, listaExtra);
 }
 	
-	private static void showList(MySimpleLinkedList list, String typeList) {
+	private static void showList(MySimpleLinkedList list, String typeList) {	//O(n): n is the list.size
 		
-		MyIterator iter = list.iterator();
-		System.out.print(typeList + " list: ");
-		for(Integer info : list)
-			System.out.print("[" + info + "]");
-		System.out.println("");
+		MyIterator iter = list.iterator();	//O(1)
+		System.out.print(typeList + " list: ");	//O(1)
+		while(iter.hasNext())	//O(n): n is the list.size
+			System.out.print("[" + iter.next() + "]");	//O(1)
+		System.out.println("");	//O(1)
 	}
 	
-	private static void getSubsequence(int umbral, MySimpleLinkedList list) {
+	private static void getSubsequence(int umbral, MySimpleLinkedList list) {	//O(n+n)= O(2n)=> O(n): n is the list.size
 		
-		MyIterator iter = list.iterator();
-		MySimpleLinkedList newList = new MySimpleLinkedList();
+		MyIterator iter = list.iterator();	//O(1)
+		MySimpleLinkedList newList = new MySimpleLinkedList();	//O(1)
 		
-		Integer summation = 0;
+		Integer summation = 0;	//O(1)
 		
-		while(iter.hasNext()){
-			Integer valor = iter.next();
-			if(valor <= umbral){
-				if((summation + valor) <= umbral){
+		while(iter.hasNext()){	//O(n): n is list.size
+			Integer valor = iter.next();	//O(1)
+			if(valor <= umbral){	//O(1)
+				if((summation + valor) <= umbral){	//O(1)
 					
-					summation = summation + valor;
+					summation = summation + valor;	//O(1)
 					
-					if(!iter.hasNext()){
-						newList.insertLast(summation);
+					if(!iter.hasNext()){	//O(1)
+						newList.insertLast(summation);	//O(1)
 					}
 				}
 				else{
-					newList.insertLast(summation);
-					summation = valor;
+					newList.insertLast(summation);	//O(1)
+					summation = valor;	//O(1)
 				}
 			}
 			else{
-				if(summation != 0){
-					newList.insertLast(summation);
-					summation = 0;
+				if(summation != 0){	//O(1)
+					newList.insertLast(summation);	//O(1)
+					summation = 0;	//O(1)
 				}
 			}
 		}
-		System.out.println("Umbral: " + umbral);
-		showList(newList, "output");
+		System.out.println("Umbral: " + umbral);	//O(1)
+		showList(newList, "output");	//O(n): n is list.size()
 	}
 }
