@@ -1,5 +1,3 @@
-
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -16,20 +14,19 @@ public class Main {
 			MySimpleLinkedList lista1 = new MySimpleLinkedList();
 		
 		//salida
-			/*showList(lista1, "input 1");
-			getSubsequence(umbralValor10, lista1);*/
-		
+			MySimpleLinkedList seq1 = getSubsequence(umbralValor10, lista1);
+			showResults(lista1, umbralValor10, seq1);
 	//CASE 2
 		
 		//entrada
 			MySimpleLinkedList lista2 = new MySimpleLinkedList();
-			lista2.insertLast(1);
+			lista2.insertLast(1);	//O(1)
 			lista2.insertLast(2);
 			lista2.insertLast(3);
 
 		//salida
-			/*showList(lista2, "input 2");
-			getSubsequence(umbralValor10, lista2);*/
+			MySimpleLinkedList seq2 = getSubsequence(umbralValor10, lista2);//O(n)
+			showResults(lista2, umbralValor10, seq2);	//O(n)
 			
 	//CASE 3
 			
@@ -39,8 +36,8 @@ public class Main {
 			lista3.insertLast(2);
 			lista3.insertLast(3);
 		//salida
-			/*showList(lista3, "input 3");
-			getSubsequence(umbralValor2, lista3);*/
+			MySimpleLinkedList seq3 = getSubsequence(umbralValor2, lista3);
+			showResults(lista3, umbralValor2, seq3);
 			
 	//CASE 4
 			
@@ -54,8 +51,9 @@ public class Main {
 			lista4.insertLast(14);
 			lista4.insertLast(24);
 		//salida
-			/*showList(lista4, "input 4");
-			getSubsequence(umbralValor10, lista4);*/
+			
+			MySimpleLinkedList seq4 = getSubsequence(umbralValor10, lista4);
+			showResults(lista4, umbralValor10, seq4);
 	//CASE 5
 			
 		//entrada
@@ -69,14 +67,14 @@ public class Main {
 			lista5.insertLast(14);
 			lista5.insertLast(28);
 		//salida
-			/*showList(lista5, "input 5");
-			 getSubsequence(umbralValor15, lista5);*/
+			MySimpleLinkedList seq5 = getSubsequence(umbralValor15, lista5);
+			showResults(lista5, umbralValor15, seq5);
 	
 	//CASE EXTRA
 	
 	//entrada
 		MySimpleLinkedList listaExtra = new MySimpleLinkedList();
-		listaExtra.insertLast(19);
+		listaExtra.insertLast(19);	//O(1)
 		listaExtra.insertLast(1);
 		listaExtra.insertLast(2);
 		listaExtra.insertLast(2);
@@ -86,50 +84,60 @@ public class Main {
 		listaExtra.insertLast(19);
 		listaExtra.insertLast(3);	
 	//salida
-		showList(listaExtra, "input 6");
-		getSubsequence(umbralExtraValor4, listaExtra);
+		MySimpleLinkedList seqExtra = getSubsequence(umbralExtraValor4, listaExtra);//O(n)
+		showResults(listaExtra, umbralExtraValor4, seqExtra);//O(n)
+	
 }
-	
-	private static void showList(MySimpleLinkedList list, String typeList) {	//O(n): n is the list.size
+	public static MySimpleLinkedList getSubsequence(int umbral, MySimpleLinkedList list) {	
+	//O(n): n is the list.size
 		
 		MyIterator iter = list.iterator();	//O(1)
-		System.out.print(typeList + " list: ");	//O(1)
-		while(iter.hasNext())	//O(n): n is the list.size
-			System.out.print("[" + iter.next() + "]");	//O(1)
-		System.out.println("");	//O(1)
-	}
-	
-	private static void getSubsequence(int umbral, MySimpleLinkedList list) {	//O(n+n)= O(2n)=> O(n): n is the list.size
+		MySimpleLinkedList newList = new MySimpleLinkedList();
 		
-		MyIterator iter = list.iterator();	//O(1)
-		MySimpleLinkedList newList = new MySimpleLinkedList();	//O(1)
-		
-		Integer summation = 0;	//O(1)
+		Integer summation = 0;
 		
 		while(iter.hasNext()){	//O(n): n is list.size
-			Integer valor = iter.next();	//O(1)
-			if(valor <= umbral){	//O(1)
-				if((summation + valor) <= umbral){	//O(1)
+			Integer valor = iter.next();
+			if(valor <= umbral){	
+				if((summation + valor) <= umbral){
 					
-					summation = summation + valor;	//O(1)
+					summation = summation + valor;
 					
-					if(!iter.hasNext()){	//O(1)
+					if(!iter.hasNext()){
 						newList.insertLast(summation);	//O(1)
 					}
 				}
 				else{
 					newList.insertLast(summation);	//O(1)
-					summation = valor;	//O(1)
+					summation = valor;
 				}
 			}
 			else{
-				if(summation != 0){	//O(1)
+				if(summation != 0){
 					newList.insertLast(summation);	//O(1)
-					summation = 0;	//O(1)
+					summation = 0;
 				}
 			}
 		}
-		System.out.println("Umbral: " + umbral);	//O(1)
-		showList(newList, "output");	//O(n): n is list.size()
+		return newList;
 	}
+	
+	public static void showList(MySimpleLinkedList list, String typeList) {	
+	//O(n): n is the list.size
+		
+		MyIterator iter = list.iterator();	//O(1)
+		System.out.print(typeList);
+		while(iter.hasNext())	//O(n): n is the list.size
+			System.out.print("[" + iter.next() + "]");
+	}
+	
+	public static void showResults(MySimpleLinkedList inputList, int umbral, MySimpleLinkedList outputList) {	
+	//O(n+n)= O(2n) => O(n) : n is the list.size
+		showList(inputList, "Lista Entrada: ");		//O(n): n is list.size
+		System.out.println("  Umbral: " + umbral);
+		showList(outputList, "Lista Salida : ");	//O(n): n is list.size
+		System.out.println("");
+		System.out.println("---------------------------------------------------------------------"); //O(1)
+	}
+	
 }

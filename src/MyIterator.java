@@ -9,8 +9,8 @@ public class MyIterator implements Iterator<Integer>{
 	
 	//CONSTRUCTORS
 	
-	public MyIterator(Node first){	//O(1)
-		this.cursor = first;	//O(1)
+	public MyIterator(Node first){
+		this.cursor = first;
 	}
 	
 	
@@ -20,7 +20,7 @@ public class MyIterator implements Iterator<Integer>{
 	
 	@Override
 	public boolean hasNext() {	//O(1)
-		return this.cursor != null;	//O(1)
+		return this.cursor != null;
 	}
 
 	@Override

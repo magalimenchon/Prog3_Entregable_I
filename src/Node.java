@@ -8,14 +8,14 @@ public class Node {
 	
 	//CONSTRUCTORS
 	
-	public Node() {	//O(1)
-		this.info = null;	//O(1)
-		this.next = null;	//O(1)
+	public Node() {	
+		this.info = null;
+		this.next = null;
 	}
 	
-	public Node(Integer o, Node n) {	//O(1)
-		this.setInfo(o);	//O(1)
-		this.setNext(n);	//O(1)
+	public Node(Integer o, Node n) {	
+		this.setInfo(o);	
+		this.setNext(n);	
 	}
 	
 	
